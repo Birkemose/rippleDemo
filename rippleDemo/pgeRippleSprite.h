@@ -24,7 +24,7 @@
 #define RIPPLE_DEFAULT_LIFESPAN                 3.6f        // entire ripple lifespan
 
 // #define RIPPLE_BOUNCE                                       // makes ripples bounce off edges
-#define RIPPLE_CHILD_MODIFIER                   2.0f        // child strength modifier
+#define RIPPLE_CHILD_MODIFIER                   2.0f        // strength modifier
 
 // --------------------------------------------------------------------------
 // typedefs
