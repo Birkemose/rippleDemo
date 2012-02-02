@@ -42,9 +42,9 @@
     window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];					
 	director_ = (CCDirectorIOS*)[CCDirector sharedDirector];									
 	[director_ setDisplayStats:NO];																
-	[director_ setAnimationInterval:1.0/60];													
+	[director_ setAnimationInterval:1.0/30];													
 	CCGLView *__glView = [CCGLView viewWithFrame:[window_ bounds]								
-                                     pixelFormat:kEAGLColorFormatRGBA8							
+                                     pixelFormat:kEAGLColorFormatRGB565							
                                      depthFormat:0 /* GL_DEPTH_COMPONENT24_OES */				
                               preserveBackbuffer:NO												
                                       sharegroup:nil												
@@ -65,7 +65,7 @@
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.
-	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
 
 	
 	// Removes the startup flicker
