@@ -59,6 +59,8 @@
 		E6978DAC14DAA0D700D577D1 /* PositionTextureColor.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E6978D7314DAA08400D577D1 /* PositionTextureColor.fsh */; };
 		E6978DAD14DAA0D700D577D1 /* PositionTextureColor.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E6978D7414DAA08400D577D1 /* PositionTextureColor.vsh */; };
 		E6978DAE14DAA0D700D577D1 /* PositionTextureColorAlphaTest.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E6978D7514DAA08400D577D1 /* PositionTextureColorAlphaTest.fsh */; };
+		E6978DB114DAA7E300D577D1 /* image-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E6978DAF14DAA7E300D577D1 /* image-hd.png */; };
+		E6978DB414DAA83B00D577D1 /* image-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E6978DB314DAA83B00D577D1 /* image-ipad.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +123,8 @@
 		E6978D7314DAA08400D577D1 /* PositionTextureColor.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PositionTextureColor.fsh; sourceTree = "<group>"; };
 		E6978D7414DAA08400D577D1 /* PositionTextureColor.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PositionTextureColor.vsh; sourceTree = "<group>"; };
 		E6978D7514DAA08400D577D1 /* PositionTextureColorAlphaTest.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PositionTextureColorAlphaTest.fsh; sourceTree = "<group>"; };
+		E6978DAF14DAA7E300D577D1 /* image-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image-hd.png"; path = "Resources/image-hd.png"; sourceTree = "<group>"; };
+		E6978DB314DAA83B00D577D1 /* image-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image-ipad.png"; path = "Resources/image-ipad.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +202,8 @@
 				E6978D5914DAA08400D577D1 /* Shaders */,
 				A6037F1B148C112D00442DAA /* image_old.png */,
 				A6679E6B1488DD5300322312 /* image.png */,
+				E6978DAF14DAA7E300D577D1 /* image-hd.png */,
+				E6978DB314DAA83B00D577D1 /* image-ipad.png */,
 				A6679CEF1488DA7D00322312 /* Default.png */,
 				A6679CF11488DA7D00322312 /* fps_images.png */,
 				A6679CF31488DA7D00322312 /* Icon-72.png */,
@@ -348,6 +354,8 @@
 				A6679D011488DA7D00322312 /* iTunesArtwork in Resources */,
 				A6679E6C1488DD5300322312 /* image.png in Resources */,
 				A6037F1C148C112D00442DAA /* image_old.png in Resources */,
+				E6978DB114DAA7E300D577D1 /* image-hd.png in Resources */,
+				E6978DB414DAA83B00D577D1 /* image-ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +445,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../../SharedLibs/Cocos/lib/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -469,6 +478,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../../SharedLibs/Cocos/lib/**";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

@@ -203,6 +203,8 @@
     rippleData* newRipple;
     CGPoint pos;
     
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    
     // allocate new ripple
     newRipple = (rippleData*)malloc( sizeof( rippleData ) );
     
@@ -218,10 +220,10 @@
             pos = ccp( -parent->center.x, parent->center.y );
             break;
         case RIPPLE_CHILD_TOP:
-            pos = ccp( parent->center.x, 320 + ( 320 - parent->center.y ) );
+            pos = ccp( parent->center.x, screenSize.height + ( screenSize.height - parent->center.y ) );
             break;
         case RIPPLE_CHILD_RIGHT:
-            pos = ccp( 480 + ( 480 - parent->center.x ), parent->center.y );            
+            pos = ccp( screenSize.width + ( screenSize.width - parent->center.x ), parent->center.y );            
             break;
         case RIPPLE_CHILD_BOTTOM:
         default:
@@ -248,6 +250,7 @@
     rippleData* ripple;
     CGPoint pos;
     float distance, correction;
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
     
     // test if any ripples at all
     if ( m_rippleList.count == 0 ) return;
@@ -367,12 +370,12 @@
                 } 
                 
                 // top ripple
-                if ( ( ripple->childCreated[ RIPPLE_CHILD_TOP ] == NO ) && ( ripple->currentRadius > 320 - ripple->center.y ) ) {
+                if ( ( ripple->childCreated[ RIPPLE_CHILD_TOP ] == NO ) && ( ripple->currentRadius > screenSize.height - ripple->center.y ) ) {
                     [ self addRippleChild:ripple type:RIPPLE_CHILD_TOP ];
                 }
                 
                 // right ripple
-                if ( ( ripple->childCreated[ RIPPLE_CHILD_RIGHT ] == NO ) && ( ripple->currentRadius > 480 - ripple->center.x ) ) {
+                if ( ( ripple->childCreated[ RIPPLE_CHILD_RIGHT ] == NO ) && ( ripple->currentRadius > screenSize.width - ripple->center.x ) ) {
                     [ self addRippleChild:ripple type:RIPPLE_CHILD_RIGHT ];
                 }
                 
