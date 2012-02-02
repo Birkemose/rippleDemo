@@ -42,7 +42,9 @@
     window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];					
 	director_ = (CCDirectorIOS*)[CCDirector sharedDirector];									
 	[director_ setDisplayStats:NO];																
-	[director_ setAnimationInterval:1.0/30];													
+	[director_ setAnimationInterval:1.0/30];	
+    
+    //[director_ setProjection:kCCDirectorProjection2D];
 	CCGLView *__glView = [CCGLView viewWithFrame:[window_ bounds]								
                                      pixelFormat:kEAGLColorFormatRGB565							
                                      depthFormat:0 /* GL_DEPTH_COMPONENT24_OES */				

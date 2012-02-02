@@ -9,6 +9,7 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
+#import "CCChangeScaleWithoutPositionChangeCenter.h"
 
 // HelloWorldLayer implementation
 @implementation HelloWorldLayer
@@ -36,12 +37,39 @@
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
 
+        float scaleRTT = 2.0f;
         // --------------------------------------------------------------------------
         // create ripple sprite
         // --------------------------------------------------------------------------
 
-        rippleImage = [ pgeRippleSprite ripplespriteWithFile:@"image.png" ];
-        [ self addChild:rippleImage ];
+        CGSize screenSize = [CCDirector sharedDirector].winSize;
+        
+        float texWidth = screenSize.width/scaleRTT;
+        float texHeight = screenSize.height/scaleRTT;
+        CCRenderTexture * tex = [CCRenderTexture renderTextureWithWidth:texWidth   height:texHeight];
+        tex.position = ccp(texWidth/(2.0f), texHeight/(2.0f));
+        
+        CCSprite * spr = [CCSprite spriteWithFile:@"image.png"];
+        spr.position = ccp(tex.position.x, tex.position.y);
+        
+        [self addChild:tex];
+        
+        
+        [tex beginWithClear:0 g:0 b:0 a:1]; 
+            [spr setFlipY:YES];
+            [spr setScale:1.0f/scaleRTT];
+        [spr visit];
+        [tex end];
+        
+        tex.visible = NO;
+        rippleImage = [ pgeRippleSprite ripplespriteWithRTT:tex scaleFactor:scaleRTT];
+        [self addChild:rippleImage ];
+        rippleImage.position = ccp(screenSize.width/2 - texWidth/(2.0f), screenSize.height/2 - texHeight/(2.0f));
+
+        id changeScale = [CCChangeScaleWithoutPositionChangeCenter actionWithScale:ccp(scaleRTT,scaleRTT)];
+        [rippleImage runAction:changeScale];
+        [[rippleImage texture] setAntiAliasTexParameters];
+        
 
         // --------------------------------------------------------------------------
         
@@ -49,6 +77,7 @@
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello Cocos2D Forum" fontName:@"Marker Felt" fontSize:16];
 		label.position = ccp( 80 , 300 );
 		[self addChild: label];
+        
         
         // schedule update
         [ self schedule:@selector( update: ) ];    
@@ -76,28 +105,10 @@
 float runtime = 0;
 
 -( BOOL )ccTouchBegan:( UITouch* )touch withEvent:( UIEvent* )event {
-    runtime = 0.1f;
-    [ self ccTouchMoved:touch withEvent:event ];
     return( YES );
 }
 
 -( void )ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint pos;
-    
-    if ( runtime >= 0.1f ) {
-        
-        runtime -= 0.1f;
-        
-        // get touch position and convert to screen coordinates
-        pos = [ touch locationInView: [ touch view ] ];
-        
-        pos = [ [ CCDirector sharedDirector ] convertToGL:pos ];
-    
-        // [ rippleImage addRipple:pos type:RIPPLE_TYPE_RUBBER strength:1.0f ];    
-        [ rippleImage addRipple:pos type:RIPPLE_TYPE_WATER strength:2.0f ];  
-        
-        
-    }
 }
 
 -( void )update:( ccTime )dt {

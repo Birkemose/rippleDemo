@@ -15,6 +15,8 @@
 
 @implementation pgeRippleSprite
 
+@synthesize scaleRTT;
+
 // --------------------------------------------------------------------------
 // properties
 
@@ -25,14 +27,75 @@
 +( pgeRippleSprite* )ripplespriteWithFile:( NSString* )filename {
 	return [ [ [ self alloc ] initWithFile:filename ] autorelease ];
 }
-+( pgeRippleSprite* )initWithRTT:( CCRenderTexture* )rtt {
-    return [ [ [ self alloc ] initWithRTT:rtt ] autorelease ];
++( pgeRippleSprite* )ripplespriteWithRTT:( CCRenderTexture* )rtt scaleFactor:(float)scale {
+    return [ [ [ self alloc ] initWithRTT:rtt scaleFactor:scale] autorelease ];
 }
 
 // --------------------------------------------------------------------------
 
+-(BOOL)isPointInsideSprite:(CGPoint)pos {
+    float maxX = m_texture.contentSize.width/2.0f;
+    float maxY = m_texture.contentSize.height/2.0f;
+    if(pos.x < 0 || pos.y < 0 || 
+       pos.x > maxX || pos.y > maxY) {
+        return NO;
+    }
+    else { 
+        return YES;
+    }
+}
+
+-(BOOL)isTouchInsideSprite:( UITouch* )touch {
+    CGPoint pos;
+    pos = [ touch locationInView: [ touch view ] ];
+    pos = [ [ CCDirector sharedDirector ] convertToGL:pos ];
+    pos = [self convertToNodeSpace:pos];
+    
+    return [self isPointInsideSprite:pos];
+}
+
+-(BOOL)ccTouchBegan:( UITouch* )touch withEvent:( UIEvent* )event {
+    if(![self isTouchInsideSprite:touch]) {
+        return NO;
+    }
+    
+    [ self ccTouchMoved:touch withEvent:event ];
+    return( YES );
+}
+
+-(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+    CGPoint pos;
+    pos = [ touch locationInView: [ touch view ] ];
+    pos = [ [ CCDirector sharedDirector ] convertToGL:pos ];
+    pos = [self convertToNodeSpace:pos];
+    
+    // [ rippleImage addRipple:pos type:RIPPLE_TYPE_RUBBER strength:1.0f ];    
+    [self addRipple:pos type:RIPPLE_TYPE_WATER strength:2.0f ];  
+}
+
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+}
+
+-(void) onEnterTransitionDidFinish
+{
+	CCDirectorIOS *director =  (CCDirectorIOS*)[CCDirector sharedDirector];
+	[[director touchDispatcher] addTargetedDelegate:self priority:0  swallowsTouches:YES];
+    //CMLog(@"...%s...", __PRETTY_FUNCTION__);
+	[super onEnterTransitionDidFinish];
+}
+
+- (void)onExit
+{
+	CCDirectorIOS *director =  (CCDirectorIOS*)[CCDirector sharedDirector];
+	[[director touchDispatcher] removeDelegate:self];
+	[super onExit];
+}	
+
 -( pgeRippleSprite* )initWithFile:( NSString* )filename {
     self = [ super init ];
+    RIPPLE_DEFAULT_RADIUS = 500 / scaleRTT;
+    
     // load texture
     m_texture = [ [ CCTextureCache sharedTextureCache ] addImage: filename ];
     // reset internal data
@@ -43,7 +106,7 @@
     m_quadCountY = RIPPLE_DEFAULT_QUAD_COUNT_Y;
     [ self tesselate ];
     
-    screenSize = ccp(m_texture.pixelsWide,m_texture.pixelsHigh);
+    screenSize = ccp(m_texture.contentSize.width,m_texture.contentSize.height);
     
     shaderProgram_ = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
     [shaderProgram_ retain];
@@ -54,10 +117,13 @@
     return( self );
 }
 
--( pgeRippleSprite* )initWithRTT:( CCRenderTexture* )rtt {
+-( pgeRippleSprite* )initWithRTT:( CCRenderTexture* )rtt scaleFactor:(float)scale {
     self = [ super init ];
+    scaleRTT = scale;
+    RIPPLE_DEFAULT_RADIUS = 500 / scaleRTT;
+    
     // load texture
-    m_texture = rtt.sprite.texture;
+    m_texture = [[rtt sprite] texture];
     // reset internal data
     m_vertice = nil;
     m_textureCoordinate = nil;
@@ -66,7 +132,7 @@
     m_quadCountY = RIPPLE_DEFAULT_QUAD_COUNT_Y;
     [ self tesselate ];
     
-    screenSize = ccp(m_texture.pixelsWide,m_texture.pixelsHigh);
+    screenSize = ccp(m_texture.contentSize.width/scaleRTT,m_texture.contentSize.height/scaleRTT);
     
     shaderProgram_ = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
     [shaderProgram_ retain];
@@ -171,7 +237,7 @@
                 normalized.y = ( float )( y + yy ) / ( float )m_quadCountY;
                 
                 // calculate vertex by multiplying rectangle ( texture ) size
-                m_vertice[ vertexPos ] = ccp( normalized.x * [ m_texture contentSize ].width, normalized.y * [ m_texture contentSize ].height );
+                m_vertice[ vertexPos ] = ccp( normalized.x * [ m_texture contentSize ].width/scaleRTT, normalized.y * [ m_texture contentSize ].height/scaleRTT );
                 
                 // adjust texture coordinates according to texture size
                 // as a texture is always in the power of 2, maxS and maxT are the fragment of the size actually used
@@ -210,7 +276,7 @@
     for ( int count = 0; count < 4; count ++ ) newRipple->childCreated[ count ] = NO;
     newRipple->rippleType = type;
     newRipple->center = pos;
-    newRipple->centerCoordinate = ccp( pos.x / [ m_texture contentSize ].width * m_texture.maxS, m_texture.maxT - ( pos.y / [ m_texture contentSize ].height * m_texture.maxT ) );
+    newRipple->centerCoordinate = ccp( pos.x / [ m_texture contentSize ].width * m_texture.maxS/scaleRTT, m_texture.maxT - ( pos.y / [ m_texture contentSize ].height * m_texture.maxT/scaleRTT ) );
     newRipple->radius = RIPPLE_DEFAULT_RADIUS; // * strength;
     newRipple->strength = strength;
     newRipple->runtime = 0;

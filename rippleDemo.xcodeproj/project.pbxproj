@@ -61,6 +61,7 @@
 		E6978DAE14DAA0D700D577D1 /* PositionTextureColorAlphaTest.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E6978D7514DAA08400D577D1 /* PositionTextureColorAlphaTest.fsh */; };
 		E6978DB114DAA7E300D577D1 /* image-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E6978DAF14DAA7E300D577D1 /* image-hd.png */; };
 		E6978DB414DAA83B00D577D1 /* image-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E6978DB314DAA83B00D577D1 /* image-ipad.png */; };
+		E6AE5EEB14DB52E600A7A9A9 /* CCChangeScaleWithoutPositionChangeCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6AE5EEA14DB52E600A7A9A9 /* CCChangeScaleWithoutPositionChangeCenter.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,6 +126,8 @@
 		E6978D7514DAA08400D577D1 /* PositionTextureColorAlphaTest.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PositionTextureColorAlphaTest.fsh; sourceTree = "<group>"; };
 		E6978DAF14DAA7E300D577D1 /* image-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image-hd.png"; path = "Resources/image-hd.png"; sourceTree = "<group>"; };
 		E6978DB314DAA83B00D577D1 /* image-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image-ipad.png"; path = "Resources/image-ipad.png"; sourceTree = "<group>"; };
+		E6AE5EE914DB52E600A7A9A9 /* CCChangeScaleWithoutPositionChangeCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCChangeScaleWithoutPositionChangeCenter.h; sourceTree = "<group>"; };
+		E6AE5EEA14DB52E600A7A9A9 /* CCChangeScaleWithoutPositionChangeCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCChangeScaleWithoutPositionChangeCenter.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +195,8 @@
 				A6679E4B1488DA8000322312 /* GameConfig.h */,
 				A6679E511488DCD900322312 /* pgeRippleSprite.h */,
 				A6679E521488DCD900322312 /* pgeRippleSprite.mm */,
+				E6AE5EE914DB52E600A7A9A9 /* CCChangeScaleWithoutPositionChangeCenter.h */,
+				E6AE5EEA14DB52E600A7A9A9 /* CCChangeScaleWithoutPositionChangeCenter.mm */,
 			);
 			path = rippleDemo;
 			sourceTree = "<group>";
@@ -370,6 +375,7 @@
 				A6679E441488DA8000322312 /* AppDelegate.mm in Sources */,
 				A6679E4A1488DA8000322312 /* HelloWorldLayer.mm in Sources */,
 				A6679E531488DCD900322312 /* pgeRippleSprite.mm in Sources */,
+				E6AE5EEB14DB52E600A7A9A9 /* CCChangeScaleWithoutPositionChangeCenter.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
