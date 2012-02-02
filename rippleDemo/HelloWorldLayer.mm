@@ -20,6 +20,7 @@
 	
 	// 'layer' is an autorelease object.
 	HelloWorldLayer *layer = [HelloWorldLayer node];
+    //[layer setScale:0.5f];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -89,6 +90,7 @@ float runtime = 0;
         
         // get touch position and convert to screen coordinates
         pos = [ touch locationInView: [ touch view ] ];
+        
         pos = [ [ CCDirector sharedDirector ] convertToGL:pos ];
     
         // [ rippleImage addRipple:pos type:RIPPLE_TYPE_RUBBER strength:1.0f ];    

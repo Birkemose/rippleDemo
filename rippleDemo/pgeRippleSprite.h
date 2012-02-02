@@ -71,6 +71,8 @@ typedef struct _rippleData {
     CGPoint*                m_rippleCoordinate;             // texture coordinates ( ripple corrected )
     bool*                   m_edgeVertice;                  // vertice is a border vertice        
     NSMutableArray*         m_rippleList;                   // list of running ripples
+    
+    CGPoint screenSize;
 }
 
 // --------------------------------------------------------------------------
@@ -80,7 +82,9 @@ typedef struct _rippleData {
 // methods
 
 +( pgeRippleSprite* )ripplespriteWithFile:( NSString* )filename;
++( pgeRippleSprite* )initWithRTT:( CCRenderTexture* )rtt;
 -( pgeRippleSprite* )initWithFile:( NSString* )filename;
+-( pgeRippleSprite* )initWithRTT:( CCRenderTexture* )rtt;
 -( void )tesselate;
 -( void )addRipple:( CGPoint )pos type:( RIPPLE_TYPE )type strength:( float )strength;
 -( void )addRippleChild:( rippleData* )parent type:( RIPPLE_CHILD )type;

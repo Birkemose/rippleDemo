@@ -25,6 +25,9 @@
 +( pgeRippleSprite* )ripplespriteWithFile:( NSString* )filename {
 	return [ [ [ self alloc ] initWithFile:filename ] autorelease ];
 }
++( pgeRippleSprite* )initWithRTT:( CCRenderTexture* )rtt {
+    return [ [ [ self alloc ] initWithRTT:rtt ] autorelease ];
+}
 
 // --------------------------------------------------------------------------
 
@@ -39,6 +42,31 @@
     m_quadCountX = RIPPLE_DEFAULT_QUAD_COUNT_X;
     m_quadCountY = RIPPLE_DEFAULT_QUAD_COUNT_Y;
     [ self tesselate ];
+    
+    screenSize = ccp(m_texture.pixelsWide,m_texture.pixelsHigh);
+    
+    shaderProgram_ = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
+    [shaderProgram_ retain];
+    
+    // create ripple list
+    m_rippleList = [ [ [ NSMutableArray alloc ] init ] retain ];
+    // done
+    return( self );
+}
+
+-( pgeRippleSprite* )initWithRTT:( CCRenderTexture* )rtt {
+    self = [ super init ];
+    // load texture
+    m_texture = rtt.sprite.texture;
+    // reset internal data
+    m_vertice = nil;
+    m_textureCoordinate = nil;
+    // builds the vertice and texture-coordinates arrays
+    m_quadCountX = RIPPLE_DEFAULT_QUAD_COUNT_X;
+    m_quadCountY = RIPPLE_DEFAULT_QUAD_COUNT_Y;
+    [ self tesselate ];
+    
+    screenSize = ccp(m_texture.pixelsWide,m_texture.pixelsHigh);
     
     shaderProgram_ = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
     [shaderProgram_ retain];
@@ -203,7 +231,7 @@
     rippleData* newRipple;
     CGPoint pos;
     
-    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    //CGSize screenSize = [CCDirector sharedDirector].winSize;
     
     // allocate new ripple
     newRipple = (rippleData*)malloc( sizeof( rippleData ) );
@@ -220,10 +248,10 @@
             pos = ccp( -parent->center.x, parent->center.y );
             break;
         case RIPPLE_CHILD_TOP:
-            pos = ccp( parent->center.x, screenSize.height + ( screenSize.height - parent->center.y ) );
+            pos = ccp( parent->center.x, screenSize.y + ( screenSize.y - parent->center.y ) );
             break;
         case RIPPLE_CHILD_RIGHT:
-            pos = ccp( screenSize.width + ( screenSize.width - parent->center.x ), parent->center.y );            
+            pos = ccp( screenSize.x + ( screenSize.x - parent->center.x ), parent->center.y );            
             break;
         case RIPPLE_CHILD_BOTTOM:
         default:
@@ -250,7 +278,7 @@
     rippleData* ripple;
     CGPoint pos;
     float distance, correction;
-    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    //CGSize screenSize = [CCDirector sharedDirector].winSize;
     
     // test if any ripples at all
     if ( m_rippleList.count == 0 ) return;
@@ -370,7 +398,7 @@
                 } 
                 
                 // top ripple
-                if ( ( ripple->childCreated[ RIPPLE_CHILD_TOP ] == NO ) && ( ripple->currentRadius > screenSize.height - ripple->center.y ) ) {
+                if ( ( ripple->childCreated[ RIPPLE_CHILD_TOP ] == NO ) && ( ripple->currentRadius > screenSize.y - ripple->center.y ) ) {
                     [ self addRippleChild:ripple type:RIPPLE_CHILD_TOP ];
                 }
                 
