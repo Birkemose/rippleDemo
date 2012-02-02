@@ -1,0 +1,12 @@
+Very quick Cocos2D 2.0 conversion of the CCRipple demo forked from the author's Github page.
+
+You will need to download and install the pre-built Cocos2D library over here:
+
+https://github.com/Panajev/CocosLib
+
+The suggested directory structure is the following one:
+
+-CocosLib (downloaded from Github)
+-SharedLibs (create it manually)
+-Cocos2D_tests
+--rippleDemo
