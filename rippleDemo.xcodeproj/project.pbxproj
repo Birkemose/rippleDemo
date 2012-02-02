@@ -427,27 +427,17 @@
 				GCC_THUMB_SUPPORT = NO;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				GCC_VERSION = "";
-				HEADER_SEARCH_PATHS = (
-					"../../SharedLibs/Utilities-Debug/include/**",
-					"../../SharedLibs/Cocos-Debug/include/**",
-					"../../SharedLibs/Facebook-Debug/include/**",
-				);
+				HEADER_SEARCH_PATHS = "../../SharedLibs/Cocos-Debug/include/**";
 				INFOPLIST_FILE = rippleDemo/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
-				LIBRARY_SEARCH_PATHS = (
-					"../../SharedLibs/Utilities-Debug/lib/**",
-					"../../SharedLibs/Cocos-Debug/lib/**",
-					"../../SharedLibs/Facebook/lib/**",
-				);
+				LIBRARY_SEARCH_PATHS = "../../SharedLibs/Cocos-Debug/lib/**";
 				OTHER_LDFLAGS = (
 					"-all_load",
-					"-lUtilities",
 					"-lCocos",
-					"-lFacebook",
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "../../SharedLibs/Utilities/lib/** ../../SharedLibs/Cocos/lib/** ../../SharedLibs/Facebook/lib/**";
+				USER_HEADER_SEARCH_PATHS = "../../SharedLibs/Cocos/lib/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -469,27 +459,17 @@
 				GCC_THUMB_SUPPORT = NO;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				GCC_VERSION = "";
-				HEADER_SEARCH_PATHS = (
-					"../../SharedLibs/Utilities/include/**",
-					"../../SharedLibs/Cocos/include/**",
-					"../../SharedLibs/Facebook/include/**",
-				);
+				HEADER_SEARCH_PATHS = "../../SharedLibs/Cocos/include/**";
 				INFOPLIST_FILE = rippleDemo/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
-				LIBRARY_SEARCH_PATHS = (
-					"../../SharedLibs/Utilities/lib/**",
-					"../../SharedLibs/Cocos/lib/**",
-					"../../SharedLibs/Facebook/lib/**",
-				);
+				LIBRARY_SEARCH_PATHS = "../../SharedLibs/Cocos/lib/**";
 				OTHER_LDFLAGS = (
 					"-all_load",
-					"-lUtilities",
 					"-lCocos",
-					"-lFacebook",
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "../../SharedLibs/Utilities/lib/** ../../SharedLibs/Cocos/lib/** ../../SharedLibs/Facebook/lib/**";
+				USER_HEADER_SEARCH_PATHS = "../../SharedLibs/Cocos/lib/**";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
