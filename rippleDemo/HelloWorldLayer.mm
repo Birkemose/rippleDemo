@@ -37,7 +37,7 @@
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
         
-        float scaleRTT = 1.0f;
+        float scaleRTT = 4.0f;
         // --------------------------------------------------------------------------
         // create ripple sprite
         // --------------------------------------------------------------------------
@@ -67,6 +67,8 @@
         rippleImage = [ pgeRippleSprite ripplespriteWithRTT:tex scaleFactor:scaleRTT];
         [self addChild:rippleImage ];
         [tex removeFromParentAndCleanup:YES];
+        
+        scaleRTT = 1;
         
         rippleImage.position = ccp(screenSize.width/2 - (texWidth*scaleRTT)/(2.0f), screenSize.height/2 - (texHeight*scaleRTT)/(2.0f));
         rippleImage.scale=scaleRTT;

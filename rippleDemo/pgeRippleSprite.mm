@@ -141,8 +141,20 @@
     
     screenSize = ccp(m_texture.contentSize.width/scaleRTT,m_texture.contentSize.height/scaleRTT);
     
-    shaderProgram_ = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
-    [shaderProgram_ retain];
+    self.shaderProgram = [[CCGLProgram alloc] initWithVertexShaderFilename:@"PositionTexture.vsh"
+                                                    fragmentShaderFilename:@"rippleShader.fsh"];
+    [self.shaderProgram release];
+    
+    CHECK_GL_ERROR_DEBUG();
+    
+    [shaderProgram_ addAttribute:kCCAttributeNamePosition index:kCCVertexAttrib_Position];
+    [shaderProgram_ addAttribute:kCCAttributeNameTexCoord index:kCCVertexAttrib_TexCoords];
+    CHECK_GL_ERROR_DEBUG();
+    
+    [shaderProgram_ link];
+    CHECK_GL_ERROR_DEBUG();
+    
+    [shaderProgram_ updateUniforms];
     
     // create ripple list
     m_rippleList = [ [ [ NSMutableArray alloc ] init ] retain ];
@@ -160,11 +172,16 @@
 	
     ccGLBindTexture2D([ m_texture name ] );
     
+    glUniform2f(glGetUniformLocation(shaderProgram_->program_, "phaseShiftXY"),0,0);
+    glUniform1f(glGetUniformLocation(shaderProgram_->program_, "time"), runTime);
+    
     // vertex
     glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, (void*) m_vertice);
     
     // if no ripples running, use original coordinates ( Yay, dig that kewl old school C syntax )
-    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, ( m_rippleList.count == 0 ) ? m_textureCoordinate : m_rippleCoordinate);
+    //glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, ( m_rippleList.count == 0 ) ? m_textureCoordinate : m_rippleCoordinate);
+    
+    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, (m_textureCoordinate));
     
     // draw as many triangle fans, as quads in y direction
     for ( int strip = 0; strip < m_quadCountY; strip++ ) {
@@ -349,7 +366,13 @@
 // update any running ripples
 // it is parents responsibility to call the method with appropriate intervals
 
+ccTime runTime = 0;
+
 -( void )update:( ccTime )dt {
+    
+    runTime += dt;
+    
+    return;
     rippleData* ripple;
     CGPoint pos;
     float distance, correction;

@@ -32,6 +32,8 @@
 		A6679E6C1488DD5300322312 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = A6679E6B1488DD5300322312 /* image.png */; };
 		E63DBAB514DBE6930011FA03 /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E63DBAB414DBE6930011FA03 /* fps_images-hd.png */; };
 		E63DBAB814DBE6B50011FA03 /* fps_images-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E63DBAB714DBE6B50011FA03 /* fps_images-ipad.png */; };
+		E63DBABD14DBF96B0011FA03 /* rippleShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E63DBAB914DBF7A50011FA03 /* rippleShader.fsh */; };
+		E63DBABE14DBF96B0011FA03 /* rippleShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E63DBABA14DBF7A50011FA03 /* rippleShader.vsh */; };
 		E656D16214DA9DAB00F8B481 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E656D16114DA9DAB00F8B481 /* SystemConfiguration.framework */; };
 		E6978D9314DAA0D700D577D1 /* example_Blur.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E6978D5A14DAA08400D577D1 /* example_Blur.fsh */; };
 		E6978D9414DAA0D700D577D1 /* example_Flower.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E6978D5B14DAA08400D577D1 /* example_Flower.fsh */; };
@@ -99,6 +101,8 @@
 		A6679E6B1488DD5300322312 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image.png; path = Resources/image.png; sourceTree = "<group>"; };
 		E63DBAB414DBE6930011FA03 /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-hd.png"; path = "rippleDemo/Resources/fps_images-hd.png"; sourceTree = SOURCE_ROOT; };
 		E63DBAB714DBE6B50011FA03 /* fps_images-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-ipad.png"; path = "Resources/fps_images-ipad.png"; sourceTree = "<group>"; };
+		E63DBAB914DBF7A50011FA03 /* rippleShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = rippleShader.fsh; sourceTree = "<group>"; };
+		E63DBABA14DBF7A50011FA03 /* rippleShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = rippleShader.vsh; sourceTree = "<group>"; };
 		E656D16114DA9DAB00F8B481 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E6978D5A14DAA08400D577D1 /* example_Blur.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = example_Blur.fsh; sourceTree = "<group>"; };
 		E6978D5B14DAA08400D577D1 /* example_Flower.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = example_Flower.fsh; sourceTree = "<group>"; };
@@ -243,6 +247,8 @@
 		E6978D5914DAA08400D577D1 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				E63DBAB914DBF7A50011FA03 /* rippleShader.fsh */,
+				E63DBABA14DBF7A50011FA03 /* rippleShader.vsh */,
 				E6978D5A14DAA08400D577D1 /* example_Blur.fsh */,
 				E6978D5B14DAA08400D577D1 /* example_Flower.fsh */,
 				E6978D5C14DAA08400D577D1 /* example_Flower.vsh */,
@@ -326,6 +332,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E63DBABD14DBF96B0011FA03 /* rippleShader.fsh in Resources */,
+				E63DBABE14DBF96B0011FA03 /* rippleShader.vsh in Resources */,
 				E6978D9314DAA0D700D577D1 /* example_Blur.fsh in Resources */,
 				E6978D9414DAA0D700D577D1 /* example_Flower.fsh in Resources */,
 				E6978D9514DAA0D700D577D1 /* example_Flower.vsh in Resources */,
@@ -453,12 +461,14 @@
 				INFOPLIST_FILE = rippleDemo/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = "../../SharedLibs/Cocos-Debug/lib/**";
+				LINKER_DISPLAYS_MANGLED_NAMES = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-lCocos",
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = debugging;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../../SharedLibs/Cocos/lib/**";
 				WRAPPER_EXTENSION = app;
@@ -473,12 +483,13 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = rippleDemo/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				GCC_VERSION = "";
@@ -486,12 +497,14 @@
 				INFOPLIST_FILE = rippleDemo/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = "../../SharedLibs/Cocos/lib/**";
+				LINKER_DISPLAYS_MANGLED_NAMES = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-lCocos",
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = debugging;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../../SharedLibs/Cocos/lib/**";
 				VALIDATE_PRODUCT = YES;
