@@ -141,7 +141,7 @@
     
     screenSize = ccp(m_texture.contentSize.width/scaleRTT,m_texture.contentSize.height/scaleRTT);
     
-    self.shaderProgram = [[CCGLProgram alloc] initWithVertexShaderFilename:@"PositionTexture.vsh"
+    self.shaderProgram = [[CCGLProgram alloc] initWithVertexShaderFilename:@"rippleShader.vsh"
                                                     fragmentShaderFilename:@"rippleShader.fsh"];
     [self.shaderProgram release];
     
