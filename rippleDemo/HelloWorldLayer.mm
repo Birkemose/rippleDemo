@@ -37,7 +37,7 @@
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
 
-        float scaleRTT = 2.0f;
+        float scaleRTT = 1.0f;
         // --------------------------------------------------------------------------
         // create ripple sprite
         // --------------------------------------------------------------------------

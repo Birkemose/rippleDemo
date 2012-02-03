@@ -34,8 +34,11 @@
 // --------------------------------------------------------------------------
 
 -(BOOL)isPointInsideSprite:(CGPoint)pos {
-    float maxX = m_texture.contentSize.width/2.0f;
-    float maxY = m_texture.contentSize.height/2.0f;
+    float maxX = m_texture.contentSize.width/scaleRTT;
+    float maxY = m_texture.contentSize.height/scaleRTT;
+    
+    NSLog(@"maxX = %.2f, pos.x = %.2f", maxX, pos.x);
+    
     if(pos.x < 0 || pos.y < 0 || 
        pos.x > maxX || pos.y > maxY) {
         return NO;
