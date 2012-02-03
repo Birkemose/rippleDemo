@@ -33,6 +33,10 @@
 
 // --------------------------------------------------------------------------
 
+- (CCTexture2D*) texture {
+    return m_texture;
+}
+
 -(BOOL)isPointInsideSprite:(CGPoint)pos {
     float maxX = m_texture.contentSize.width/scaleRTT;
     float maxY = m_texture.contentSize.height/scaleRTT;
@@ -100,7 +104,7 @@
     RIPPLE_DEFAULT_RADIUS = 500 / scaleRTT;
     
     // load texture
-    m_texture = [ [ CCTextureCache sharedTextureCache ] addImage: filename ];
+    m_texture = [[ [ CCTextureCache sharedTextureCache ] addImage: filename ] retain];
     // reset internal data
     m_vertice = nil;
     m_textureCoordinate = nil;
@@ -122,11 +126,11 @@
 
 -( pgeRippleSprite* )initWithRTT:( CCRenderTexture* )rtt scaleFactor:(float)scale {
     self = [ super init ];
-    scaleRTT = scale;
-    RIPPLE_DEFAULT_RADIUS = 500 / scaleRTT;
+    scaleRTT = 1;
+    RIPPLE_DEFAULT_RADIUS = 500 / scale;
     
     // load texture
-    m_texture = [[rtt sprite] texture];
+    m_texture = [[[rtt sprite] texture] retain];
     // reset internal data
     m_vertice = nil;
     m_textureCoordinate = nil;
@@ -191,6 +195,8 @@
     
     // delete list
     [ m_rippleList release ];
+    
+    [m_texture release];
     
     // done
     [ super dealloc ];

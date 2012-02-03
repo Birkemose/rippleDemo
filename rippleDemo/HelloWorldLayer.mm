@@ -36,18 +36,20 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
-
+        
         float scaleRTT = 1.0f;
         // --------------------------------------------------------------------------
         // create ripple sprite
         // --------------------------------------------------------------------------
-
+        
         CGSize screenSize = [CCDirector sharedDirector].winSize;
         
         float texWidth = screenSize.width/scaleRTT;
         float texHeight = screenSize.height/scaleRTT;
         CCRenderTexture * tex = [CCRenderTexture renderTextureWithWidth:texWidth   height:texHeight];
         tex.position = ccp(texWidth/(2.0f), texHeight/(2.0f));
+        [[tex.sprite texture] setAntiAliasTexParameters];
+        
         
         CCSprite * spr = [CCSprite spriteWithFile:@"image.png"];
         spr.position = ccp(tex.position.x, tex.position.y);
@@ -56,21 +58,23 @@
         
         
         [tex beginWithClear:0 g:0 b:0 a:1]; 
-            [spr setFlipY:YES];
-            [spr setScale:1.0f/scaleRTT];
+        [spr setFlipY:YES];
+        [spr setScale:1.0f/scaleRTT];
+        [[spr texture] setAntiAliasTexParameters];
         [spr visit];
         [tex end];
         
-        tex.visible = NO;
         rippleImage = [ pgeRippleSprite ripplespriteWithRTT:tex scaleFactor:scaleRTT];
         [self addChild:rippleImage ];
-        rippleImage.position = ccp(screenSize.width/2 - texWidth/(2.0f), screenSize.height/2 - texHeight/(2.0f));
-
-        id changeScale = [CCChangeScaleWithoutPositionChangeCenter actionWithScale:ccp(scaleRTT,scaleRTT)];
-        [rippleImage runAction:changeScale];
+        [tex removeFromParentAndCleanup:YES];
+        
+        rippleImage.position = ccp(screenSize.width/2 - (texWidth*scaleRTT)/(2.0f), screenSize.height/2 - (texHeight*scaleRTT)/(2.0f));
+        rippleImage.scale=scaleRTT;
         [[rippleImage texture] setAntiAliasTexParameters];
         
-
+        //rippleImage.visible=NO;
+        
+        
         // --------------------------------------------------------------------------
         
 		// create and initialize a Label
@@ -78,10 +82,14 @@
 		label.position = ccp( 80 , 300 );
 		[self addChild: label];
         
+        FPSLabel = [CCLabelTTF labelWithString:@"FPS" fontName:@"Marker Felt" fontSize:16];
+		FPSLabel.position = ccp( 80 , 100 );
+		[self addChild: FPSLabel];
+        
         
         // schedule update
         [ self schedule:@selector( update: ) ];    
-                
+        
 	}
 	return self;
 }
@@ -114,8 +122,9 @@ float runtime = 0;
 -( void )update:( ccTime )dt {
     
     runtime += dt;
-    
     [ rippleImage update:dt ];
+    
+    [FPSLabel setString: [NSString stringWithFormat:@"%0.1f", 1.f/dt] ];
 }
 
 // on "dealloc" you need to release all your retained objects

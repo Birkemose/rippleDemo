@@ -30,6 +30,8 @@
 		A6679E4A1488DA8000322312 /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6679E491488DA8000322312 /* HelloWorldLayer.mm */; };
 		A6679E531488DCD900322312 /* pgeRippleSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6679E521488DCD900322312 /* pgeRippleSprite.mm */; };
 		A6679E6C1488DD5300322312 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = A6679E6B1488DD5300322312 /* image.png */; };
+		E63DBAB514DBE6930011FA03 /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E63DBAB414DBE6930011FA03 /* fps_images-hd.png */; };
+		E63DBAB814DBE6B50011FA03 /* fps_images-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E63DBAB714DBE6B50011FA03 /* fps_images-ipad.png */; };
 		E656D16214DA9DAB00F8B481 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E656D16114DA9DAB00F8B481 /* SystemConfiguration.framework */; };
 		E6978D9314DAA0D700D577D1 /* example_Blur.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E6978D5A14DAA08400D577D1 /* example_Blur.fsh */; };
 		E6978D9414DAA0D700D577D1 /* example_Flower.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E6978D5B14DAA08400D577D1 /* example_Flower.fsh */; };
@@ -95,6 +97,8 @@
 		A6679E511488DCD900322312 /* pgeRippleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pgeRippleSprite.h; sourceTree = "<group>"; };
 		A6679E521488DCD900322312 /* pgeRippleSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = pgeRippleSprite.mm; sourceTree = "<group>"; };
 		A6679E6B1488DD5300322312 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image.png; path = Resources/image.png; sourceTree = "<group>"; };
+		E63DBAB414DBE6930011FA03 /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-hd.png"; path = "rippleDemo/Resources/fps_images-hd.png"; sourceTree = SOURCE_ROOT; };
+		E63DBAB714DBE6B50011FA03 /* fps_images-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-ipad.png"; path = "Resources/fps_images-ipad.png"; sourceTree = "<group>"; };
 		E656D16114DA9DAB00F8B481 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E6978D5A14DAA08400D577D1 /* example_Blur.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = example_Blur.fsh; sourceTree = "<group>"; };
 		E6978D5B14DAA08400D577D1 /* example_Flower.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = example_Flower.fsh; sourceTree = "<group>"; };
@@ -210,6 +214,8 @@
 				E6978DAF14DAA7E300D577D1 /* image-hd.png */,
 				E6978DB314DAA83B00D577D1 /* image-ipad.png */,
 				A6679CEF1488DA7D00322312 /* Default.png */,
+				E63DBAB714DBE6B50011FA03 /* fps_images-ipad.png */,
+				E63DBAB414DBE6930011FA03 /* fps_images-hd.png */,
 				A6679CF11488DA7D00322312 /* fps_images.png */,
 				A6679CF31488DA7D00322312 /* Icon-72.png */,
 				A6679CF51488DA7D00322312 /* Icon-Small-50.png */,
@@ -361,6 +367,8 @@
 				A6037F1C148C112D00442DAA /* image_old.png in Resources */,
 				E6978DB114DAA7E300D577D1 /* image-hd.png in Resources */,
 				E6978DB414DAA83B00D577D1 /* image-ipad.png in Resources */,
+				E63DBAB514DBE6930011FA03 /* fps_images-hd.png in Resources */,
+				E63DBAB814DBE6B50011FA03 /* fps_images-ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

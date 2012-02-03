@@ -14,6 +14,8 @@
 // HelloWorldLayer
 @interface HelloWorldLayer : CCLayer {
     pgeRippleSprite* rippleImage;
+    CCSprite * sprite;
+    CCLabelTTF * FPSLabel;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

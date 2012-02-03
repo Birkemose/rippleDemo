@@ -57,7 +57,8 @@
 	[director_ setView:__glView];																
 	[director_ setDelegate:self];																
 	director_.wantsFullScreenLayout = YES;														
-	[director_ enableRetinaDisplay:YES];														
+	[director_ enableRetinaDisplay:YES];	
+    //director_.displayStats=YES;
 	navController_ = [[UINavigationController alloc] initWithRootViewController:director_];		
 	navController_.navigationBarHidden = YES;													
 	[window_ addSubview:navController_.view];													

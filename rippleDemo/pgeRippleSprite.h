@@ -89,6 +89,7 @@ typedef struct _rippleData {
 -( void )addRipple:( CGPoint )pos type:( RIPPLE_TYPE )type strength:( float )strength;
 -( void )addRippleChild:( rippleData* )parent type:( RIPPLE_CHILD )type;
 -( void )update:( ccTime )dt;
+-(CCTexture2D*) spriteTexture;
 
 @property (nonatomic, assign) float scaleRTT;
 
