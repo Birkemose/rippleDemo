@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class RootViewController;
+@class CCDirectorIOS;
 
-@interface AppDelegate : NSObject <UIApplicationDelegate> {
-	UIWindow			*window;
-	RootViewController	*viewController;
+@interface AppDelegate : NSObject <UIApplicationDelegate, CCDirectorDelegate> {
+	UIWindow			*window_;
+    UINavigationController *navController_;
+    
+	CCDirectorIOS	*director_;	
 }
 
 @property (nonatomic, retain) UIWindow *window;
