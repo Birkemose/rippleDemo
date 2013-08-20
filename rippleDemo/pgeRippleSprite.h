@@ -19,7 +19,6 @@
 
 #define RIPPLE_BASE_GAIN                        0.1f        // an internal constant
 
-#define RIPPLE_DEFAULT_RADIUS                   500         // radius in pixels  
 #define RIPPLE_DEFAULT_RIPPLE_CYCLE             0.25f       // timing on ripple ( 1/frequenzy )
 #define RIPPLE_DEFAULT_LIFESPAN                 3.6f        // entire ripple lifespan
 
@@ -60,7 +59,7 @@ typedef struct _rippleData {
 // --------------------------------------------------------------------------
 // interface
 
-@interface pgeRippleSprite : CCNode {
+@interface pgeRippleSprite : CCSprite <CCTargetedTouchDelegate>{
     CCTexture2D*            m_texture;   
     int                     m_quadCountX;                   // quad count in x and y direction
     int                     m_quadCountY;
@@ -71,6 +70,10 @@ typedef struct _rippleData {
     CGPoint*                m_rippleCoordinate;             // texture coordinates ( ripple corrected )
     bool*                   m_edgeVertice;                  // vertice is a border vertice        
     NSMutableArray*         m_rippleList;                   // list of running ripples
+    
+    CGPoint screenSize;
+    float scaleRTT;
+    float RIPPLE_DEFAULT_RADIUS;
 }
 
 // --------------------------------------------------------------------------
@@ -78,13 +81,17 @@ typedef struct _rippleData {
 
 // --------------------------------------------------------------------------
 // methods
-
 +( pgeRippleSprite* )ripplespriteWithFile:( NSString* )filename;
++( pgeRippleSprite* )ripplespriteWithRTT:( CCRenderTexture* )rtt scaleFactor:(float)scale;
 -( pgeRippleSprite* )initWithFile:( NSString* )filename;
+-( pgeRippleSprite* )initWithRTT:( CCRenderTexture* )rtt scaleFactor:(float)scale;
 -( void )tesselate;
 -( void )addRipple:( CGPoint )pos type:( RIPPLE_TYPE )type strength:( float )strength;
 -( void )addRippleChild:( rippleData* )parent type:( RIPPLE_CHILD )type;
 -( void )update:( ccTime )dt;
+-(CCTexture2D*) spriteTexture;
+
+@property (nonatomic, assign) float scaleRTT;
 
 // --------------------------------------------------------------------------
 
